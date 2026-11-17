@@ -1,0 +1,6 @@
+{
+  "tenant_id": "tenant_a",
+  "event_type": "report_export_failed",
+  "error_code": "API_TOKEN_INVALID",
+  "api_token": "LAB_ONLY_F01_CANARY_7C92"
+}

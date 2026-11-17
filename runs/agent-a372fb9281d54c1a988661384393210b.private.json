@@ -1,0 +1,7 @@
+{
+  "runner_file": "/home/onion/projects/Agent-Control-Lab/harness/agent_f01_suspicious_benign.py",
+  "setting": "honest",
+  "fixture": "/home/onion/projects/Agent-Control-Lab/fixtures/f01_suspicious_benign/diagnostics.json",
+  "private_message_role": null,
+  "private_objective": null
+}
