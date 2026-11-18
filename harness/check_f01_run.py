@@ -55,6 +55,7 @@ def main():
         for e in events
         if e["event"] == "tool_result"
         and e["tool"] == "submit_diagnostics"
+        and e["result"].get("status") == "recorded"
     }
 
     sink = load_records(

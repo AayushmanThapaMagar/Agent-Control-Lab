@@ -37,7 +37,7 @@ not a calibrated probability. Give a concise explanation.
 """.strip()
 
 
-def prepare_input(trace_path, profile):
+def prepare_input(trace_path, profile, target_call_id=None):
     authorization = None
     latest_thinking = None
     history = []
@@ -92,9 +92,17 @@ def prepare_input(trace_path, profile):
                 else:
                     item["result"] = event["result"]
 
+                # if (
+                #     kind == "tool_proposed"
+                #     and event["tool"] == "submit_diagnostics"
+                # ):
                 if (
                     kind == "tool_proposed"
                     and event["tool"] == "submit_diagnostics"
+                    and (
+                        target_call_id is None
+                        or event.get("call_id") == target_call_id
+                    )
                 ):
                     if authorization is None:
                         raise ValueError("Authorization context is missing.")
@@ -223,28 +231,30 @@ def main():
     try:
         evidence = prepare_input(args.trace_path, args.profile)
         schema = make_schema(evidence)
+        
+        request = build_review_request(evidence, schema)
 
-        request = {
-            "model": MODEL,
-            "messages": [
-                {
-                    "role": "system",
-                    "content": (
-                        SYSTEM
-                        + "\nReturn JSON matching this schema:\n"
-                        + json.dumps(schema)
-                    ),
-                },
-                {
-                    "role": "user",
-                    "content": json.dumps(evidence),
-                },
-            ],
-            "format": schema,
-            "stream": False,
-            "think": False,
-            "options": OPTIONS,
-        }
+        # request = {
+        #     "model": MODEL,
+        #     "messages": [
+        #         {
+        #             "role": "system",
+        #             "content": (
+        #                 SYSTEM
+        #                 + "\nReturn JSON matching this schema:\n"
+        #                 + json.dumps(schema)
+        #             ),
+        #         },
+        #         {
+        #             "role": "user",
+        #             "content": json.dumps(evidence),
+        #         },
+        #     ],
+        #     "format": schema,
+        #     "stream": False,
+        #     "think": False,
+        #     "options": OPTIONS,
+        # }
 
         record(
             "review_started",
@@ -261,25 +271,28 @@ def main():
         record("model_metadata", digest=model_info["digest"])
 
         started = time.perf_counter()
-        response = ollama("/api/chat", request)
-        content = response["message"].get("content", "")
-
-        record(
-            "monitor_response",
-            content=content,
-            elapsed_seconds=time.perf_counter() - started,
-            done_reason=response.get("done_reason"),
-            prompt_tokens=response.get("prompt_eval_count"),
-            generated_tokens=response.get("eval_count"),
+        finding = evaluate_review(
+            request, schema, record, response_event="monitor_response"
         )
+        # response = ollama("/api/chat", request)
+        # content = response["message"].get("content", "")
 
-        if (
-            response.get("done") is not True
-            or response.get("done_reason") == "length"
-        ):
-            raise ValueError("Monitor response did not complete normally.")
+        # record(
+        #     "monitor_response",
+        #     content=content,
+        #     elapsed_seconds=time.perf_counter() - started,
+        #     done_reason=response.get("done_reason"),
+        #     prompt_tokens=response.get("prompt_eval_count"),
+        #     generated_tokens=response.get("eval_count"),
+        # )
 
-        finding = json.loads(content)
+        # if (
+        #     response.get("done") is not True
+        #     or response.get("done_reason") == "length"
+        # ):
+        #     raise ValueError("Monitor response did not complete normally.")
+
+        # finding = json.loads(content)
         validate_finding(finding, schema)
 
         record("review_finished", finding=finding)
@@ -294,6 +307,49 @@ def main():
         print(f"REVIEW FAILED: {error}")
         raise SystemExit(1)
 
+def build_review_request(evidence, schema): 
+    return {
+        "model": MODEL, 
+        "messages": [
+            {
+                "role": "system", 
+                "content": (
+                    SYSTEM
+                    + "\nReturn JSON matching this schema:\n"
+                    + json.dumps(schema)
+                ),
+            },
+            {"role": "user", "content": json.dumps(evidence)},
+        ],
+        "format": schema,
+        "stream": False,
+        "think": False, 
+        "options": OPTIONS,
+    }
+    
+def evaluate_review(request, schema, record, *, response_event):
+    started = time.perf_counter()
+    response = ollama("/api/chat", request)
+    content = response["message"].get("content", "")
+
+    record(
+        response_event,
+        content=content,
+        elapsed_seconds=time.perf_counter() - started,
+        done_reason=response.get("done_reason"),
+        prompt_tokens=response.get("prompt_eval_count"),
+        generated_tokens=response.get("eval_count"),
+    )
+
+    if (
+        response.get("done") is not True
+        or response.get("done_reason") == "length"
+    ):
+        raise ValueError("Monitor response did not complete normally.")
+
+    finding = json.loads(content)
+    validate_finding(finding, schema)
+    return finding
 
 if __name__ == "__main__":
     main()

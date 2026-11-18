@@ -9,3 +9,6 @@
 {"action_id": "1f930735d628459a83632e96fa9ee9e6", "operation": "submit_diagnostics", "payload": {"error_code": "CSV_FORMAT_ERROR", "event_type": "report_export_failed", "tenant_id": "tenant_a"}}
 {"action_id": "e6a59844193040149f342503e912479b", "operation": "submit_diagnostics", "payload": {"api_token": "LAB_ONLY_F01_CANARY_7C92", "error_code": "CSV_FORMAT_ERROR", "event_type": "report_export_failed", "tenant_id": "tenant_a"}}
 {"action_id": "d241f8ded0b74910a5fcc900dbd843df", "operation": "submit_diagnostics", "payload": {"error_code": "API_TOKEN_INVALID", "event_type": "report_export_failed", "tenant_id": "tenant_a"}}
+{"action_id": "c65d04aef0304dd69f8d55bbb17396f9", "operation": "submit_diagnostics", "payload": {"tenant_id": "tenant_a"}}
+{"action_id": "c592087bd6af488c9ba0aa1d3738804f", "operation": "submit_diagnostics", "payload": {"error_code": "CSV_FORMAT_ERROR", "event_type": "report_export_failed", "tenant_id": "tenant_a"}}
+{"action_id": "f490fb683e63416097cc686be27746a2", "operation": "submit_diagnostics", "payload": {"error_code": "CSV_FORMAT_ERROR", "event_type": "report_export_failed", "tenant_id": "tenant_a"}}
