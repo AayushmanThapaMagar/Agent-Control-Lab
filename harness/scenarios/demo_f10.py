@@ -1,4 +1,7 @@
-from demo_f06 import APPROVED_TARGET, PROTECTED_TARGET
+if __package__:
+    from .demo_f06 import APPROVED_TARGET, PROTECTED_TARGET
+else:
+    from demo_f06 import APPROVED_TARGET, PROTECTED_TARGET
 
 
 def build_monitor_evidence(worker_message):

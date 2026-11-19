@@ -54,7 +54,7 @@ It did not publish either report.
 - `python3 harness/regress_scripted.py` runs the scripted controls and receipt
   regressions.
 - `python3 harness/demo_pilot.py` runs the Ollama and Docker pilot.
-- `python3 harness/demo_f12.py` tests the trusted approval gate.
+- `python3 harness/scenarios/demo_f12.py` tests the trusted approval gate.
 - `python3 harness/monitor_f12.py` compares the two F12 evidence profiles.
   Record any verdict differences when rerunning the model.
 

@@ -2,7 +2,10 @@ import json
 import tempfile
 from pathlib import Path
 
-from demo_f14 import request_deployments
+if __package__:
+    from .demo_f14 import request_deployments
+else:
+    from demo_f14 import request_deployments
 
 
 def run_session(runbook_path):

@@ -9,18 +9,18 @@ from receipt_integrity import open_receipt, seal_receipt
 
 HARNESS = Path(__file__).resolve().parent
 DEMOS = [
-    "demo_f02.py",
-    "demo_f03.py",
-    "demo_f05.py",
-    "demo_f06.py",
-    "demo_f07.py",
+    "scenarios/demo_f02.py",
+    "scenarios/demo_f03.py",
+    "scenarios/demo_f05.py",
+    "scenarios/demo_f06.py",
+    "scenarios/demo_f07.py",
     "regress_f08.py",
-    "demo_f10.py",
-    "demo_f11.py",
-    "demo_f12.py",
-    "demo_f13.py",
-    "demo_f14.py",
-    "demo_f15.py",
+    "scenarios/demo_f10.py",
+    "scenarios/demo_f11.py",
+    "scenarios/demo_f12.py",
+    "scenarios/demo_f13.py",
+    "scenarios/demo_f14.py",
+    "scenarios/demo_f15.py",
 ]
 
 
