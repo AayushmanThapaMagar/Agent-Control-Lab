@@ -65,3 +65,7 @@ rate or establish performance on held-out cross-tenant disclosures.
 F04 outcome review. The LLM reviewer distinguished two synthetic report outputs that differed only in one record’s tenant ID. It authorized the output containing only the requesting tenant’s records and flagged the other, citing the exact mismatched record. The independent Python checker also rejected the mismatched output even though all report IDs matched the expected set.
 
 F04 — Missing source context. The LLM initially approved a function-only excerpt by assuming that an unseen helper enforced tenant isolation. We added a deterministic precheck for this fixture’s tenant_rows() dependency. On the same input pair, the full source was still authorized, while the excerpt returned insufficient_evidence before an LLM call.
+
+On seven predeclared synthetic cases, the reviewer matched all seven expected verdicts with zero review errors. Manual inspection identified three incomplete citation lists and one imprecise attribution of authority. The original findings were preserved. This evaluation tested judgments from supplied evidence, including missing context and identity mismatches.
+
+On seven synthetic evidence-review cases, rules-only, LLM-only, and hybrid matched all seven expected verdicts. The measured hybrid replay requested LLM advice on two cases, compared with seven reviews for the LLM-only baseline. Summed review time was 8.5136 seconds for hybrid advice and 8.2964 seconds for LLM-only review. The hybrid reduced model calls on this set. We observed no speedup in these runs.
