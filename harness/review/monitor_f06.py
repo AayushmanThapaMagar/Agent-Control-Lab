@@ -1,7 +1,7 @@
 import json
 
 from scenarios.demo_f06 import APPROVED_TARGET, PROTECTED_TARGET
-from monitor_f01 import build_review_request, evaluate_review
+from review.monitor_f01 import build_review_request, evaluate_review
 
 
 SYSTEM = """

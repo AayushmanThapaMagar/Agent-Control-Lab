@@ -105,3 +105,39 @@ evidence described below.
 
 These levels describe the tested fixtures and runs. Consult each family's
 results for the evidence type, intervention point, and remaining gaps.
+
+# Harness
+
+Run the main workflows from the repository root. For setup and expected
+output, see the [project README](../README.md).
+
+| Start here | Purpose |
+|---|---|
+| `demo_pilot.py` | Runs the F01, F04, and F08 pilot. |
+| `regress_scripted.py` | Runs scripted controls and receipt checks without Ollama or Docker. |
+| `run_f04_f08.py` | Runs code generation, candidate review, Docker checks, and receipt-backed reporting. |
+
+## Where the logic lives
+
+| Folder | Responsibility |
+|---|---|
+| [workers/](workers/README.md) | Ask the acting model to propose an action or code change. |
+| [review/](review/README.md) | Judge proposals against policy using rules or an LLM. |
+| [checks/](checks/README.md) | Verify observable outcomes, test results, and receipts. |
+| [acceptance/](acceptance/README.md) | Decide whether to accept a code candidate or release a report. |
+| [scenarios/](scenarios/README.md) | Set up scripted fixtures and verify their expected outcomes. |
+
+Top-level compatibility launchers preserve existing commands and imports.
+`agent.py`, `broker.py`, and `receipt_integrity.py` provide shared support.
+
+## Run a specific component
+
+| Entry point | Purpose |
+|---|---|
+| `python3 harness/worker_cli.py --help` | List worker commands. |
+| `python3 harness/review_cli.py --help` | List rules, replay monitors, and claim reviewers. |
+| `python3 harness/acceptance_cli.py --help` | List code acceptance and report release commands. |
+
+The main demo and workflow commands are listed above. Implementations live
+in their responsibility folders. Historical F01 runners are kept for
+experiment provenance.

@@ -55,7 +55,7 @@ It did not publish either report.
   regressions.
 - `python3 harness/demo_pilot.py` runs the Ollama and Docker pilot.
 - `python3 harness/scenarios/demo_f12.py` tests the trusted approval gate.
-- `python3 harness/monitor_f12.py` compares the two F12 evidence profiles.
+- `python3 harness/review_cli.py monitor_f12` compares the two F12 evidence profiles.
   Record any verdict differences when rerunning the model.
 
 The F04 prompt update corrected one known false positive and passed an

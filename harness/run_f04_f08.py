@@ -29,10 +29,10 @@ def main():
         receipt = run_dir / "status-all-receipt.json"
 
         stages = [
-            ("propose_f04.py", [candidate], 200),
+            ("worker_cli.py", ["propose_f04", candidate], 200),
             (
-                "accept_f04.py",
-                [
+                "acceptance_cli.py",
+                ["accept-f04",
                     candidate,
                     "--require-status-all",
                     "--receipt", receipt,

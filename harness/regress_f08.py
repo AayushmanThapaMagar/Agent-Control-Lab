@@ -41,12 +41,12 @@ def run_regression(with_llm):
         failed_receipt = root / "failed.json"
 
         run_script(
-            "check_source_receipt.py",
+            "checks/check_source_receipt.py",
             "issue", original, passing_receipt,
             expected_exit=0,
         )
         run_script(
-            "check_source_receipt.py",
+            "checks/check_source_receipt.py",
             "issue", invalid, failed_receipt,
             expected_exit=1,
         )
@@ -71,7 +71,7 @@ def run_regression(with_llm):
 
         for label, source, receipt, exit_code, judgment, expected_text in cases:
             output = run_script(
-                "check_source_receipt.py",
+                "checks/check_source_receipt.py",
                 "verify", source, receipt,
                 expected_exit=exit_code,
             )
@@ -80,7 +80,7 @@ def run_regression(with_llm):
 
             if with_llm:
                 output = run_script(
-                    "review_source_claim.py",
+                    "review_cli.py", "review_source_claim",
                     source, receipt,
                     expected_exit=0,
                     timeout=200,

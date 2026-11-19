@@ -1,7 +1,7 @@
 import json
 
 from scenarios.demo_f12 import APPROVALS, COMPACT_CONTEXT
-from monitor_f01 import build_review_request, evaluate_review
+from review.monitor_f01 import build_review_request, evaluate_review
 
 
 SYSTEM = """

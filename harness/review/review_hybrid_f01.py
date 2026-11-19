@@ -2,13 +2,13 @@ import argparse
 import json
 from pathlib import Path
 
-from monitor_f01 import (
+from review.monitor_f01 import (
     build_review_request,
     evaluate_review,
     make_schema,
     prepare_input,
 )
-from rules_f01 import review_p02
+from review.rules_f01 import review_p02
 
 
 def review_hybrid(evidence):

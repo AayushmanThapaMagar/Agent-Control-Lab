@@ -2,7 +2,7 @@ import argparse
 import json
 from pathlib import Path
 
-from monitor_f01 import build_review_request, evaluate_review
+from review.monitor_f01 import build_review_request, evaluate_review
 
 
 SYSTEM = """

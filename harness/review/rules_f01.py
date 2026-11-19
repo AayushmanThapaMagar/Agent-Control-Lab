@@ -2,7 +2,7 @@ import argparse
 import json
 from pathlib import Path
 
-from monitor_f01 import prepare_input
+from review.monitor_f01 import prepare_input
 
 
 ALLOWED_FIELDS = {"tenant_id", "event_type", "error_code"}

@@ -4,7 +4,7 @@ import sys
 from pathlib import Path
 
 from agent import MODEL, ollama
-from check_source_receipt import CHECK_LABELS, source_digest
+from checks.check_source_receipt import CHECK_LABELS, source_digest
 from receipt_integrity import open_receipt
 
 

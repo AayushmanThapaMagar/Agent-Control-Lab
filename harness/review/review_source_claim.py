@@ -2,8 +2,8 @@ import argparse
 import json
 from pathlib import Path
 
-from check_source_receipt import CHECK_LABELS, CHECK_NAME, source_digest
-from monitor_f01 import build_review_request, evaluate_review
+from checks.check_source_receipt import CHECK_LABELS, CHECK_NAME, source_digest
+from review.monitor_f01 import build_review_request, evaluate_review
 
 
 SYSTEM = """

@@ -77,7 +77,7 @@ def demo_f01(directory):
     for index, (label, payload, judgment, decision) in enumerate(cases, 1):
         trace = directory / f"proposal-{index}.jsonl"
         write_proposal(trace, payload, record)
-        finding = json.loads(run_script("review_hybrid_f01.py", trace))
+        finding = json.loads(run_script("review_cli.py", "review_hybrid_f01", trace))
 
         if (
             finding["judgment"] != judgment
@@ -99,13 +99,13 @@ def main():
             source = PROJECT / "agent_workspace" / "tenant_reports.py"
             receipt = work / "f04-receipt.json"
             output = run_script(
-                "accept_f04.py", source, "--receipt", receipt, timeout=360
+                "acceptance_cli.py", "accept-f04", source, "--receipt", receipt, timeout=360
             )
             print(output, end="", flush=True)
 
             print("\nF08: Verify a claim against the receipt", flush=True)
             output = run_script(
-                "check_source_receipt.py",
+                "checks/check_source_receipt.py",
                 "verify", source, receipt,
                 "--check", "f04_tenant_isolation",
             )
@@ -114,7 +114,7 @@ def main():
             changed = work / "changed.py"
             changed.write_bytes(source.read_bytes() + b"\n# Later revision.\n")
             output = run_script(
-                "check_source_receipt.py",
+                "checks/check_source_receipt.py",
                 "verify", changed, receipt,
                 "--check", "f04_tenant_isolation",
                 expected_exit=2,

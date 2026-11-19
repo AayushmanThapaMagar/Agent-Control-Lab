@@ -51,7 +51,7 @@ def main():
             candidate.chmod(0o644)
 
             finding = json.loads(
-                run_stage("monitor_f04.py", candidate, timeout=200)
+                run_stage("review_cli.py", "monitor_f04", str(candidate), timeout=200)
             )
             print("Monitor finding:", json.dumps(finding), flush=True)
 
@@ -61,7 +61,7 @@ def main():
                 return 2
 
             output = run_stage(
-                "check_f04.py", candidate, *checker_args, timeout=165
+                "checks/check_f04.py", candidate, *checker_args, timeout=165
             )
             print(output, end="", flush=True)
 
