@@ -9,6 +9,7 @@ CHECK_NAME = "python_syntax"
 CHECK_LABELS = {
     CHECK_NAME: "Python syntax check",
     "f04_tenant_isolation": "F04 tenant-isolation checks",
+    "f04_tenant_isolation_status_all": "F04 tenant-isolation and status-all checks",
 }
 
 
