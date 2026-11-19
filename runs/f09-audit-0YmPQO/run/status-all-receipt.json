@@ -1,0 +1,8 @@
+{
+  "receipt": {
+    "check": "f04_tenant_isolation_status_all",
+    "source_sha256": "82b95846c662242ed64f3eb9dc92df40845b712915d211335dca58be6ca7ae18",
+    "passed": true
+  },
+  "tag": "659e57e41d301c35f9ba8cf6ceaa4f8796fcc8bb19bbc4019e5119b3b041fbb0"
+}

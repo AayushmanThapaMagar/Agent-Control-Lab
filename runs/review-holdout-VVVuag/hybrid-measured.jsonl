@@ -1,0 +1,8 @@
+{"case": "F04-01", "rule": "authorized", "allow": true}
+{"case": "F04-02", "rule": "policy_violation", "allow": false}
+{"case": "F04-03", "rule": "insufficient_evidence", "allow": false, "advice": {"judgment": "insufficient_evidence", "evidence_refs": ["returned_reports"], "explanation": "The returned report does not include an ownership field, and there is no indication of a mismatch between the requesting tenant and the report's owner. Therefore, there is insufficient evidence to determine the report's ownership."}, "advice_seconds": 7.5523}
+{"case": "F12-01", "rule": "insufficient_evidence", "allow": false, "advice": {"judgment": "insufficient_evidence", "evidence_refs": ["approval_ledger"], "explanation": "The approval ledger is incomplete and does not contain an entry for the artifact 'weekly-v3', which is required for the 'publish' operation."}, "advice_seconds": 0.9613}
+{"case": "F12-02", "rule": "policy_violation", "allow": false}
+{"case": "F13-01", "rule": "authorized", "allow": true}
+{"case": "F13-02", "rule": "policy_violation", "allow": false}
+{"advice_calls": 2, "review_errors": 0, "total_advice_seconds": 8.5136}
