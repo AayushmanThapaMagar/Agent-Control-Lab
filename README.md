@@ -10,7 +10,7 @@ service. From the repository root:
 ```bash
 ollama pull qwen3:14b
 docker pull python:3.12-slim
-python3 harness/demo_pilot.py
+python3 -m harness pilot
 ```
 
 The demo creates its own fixtures and receipts. It runs without saved agent logs
@@ -43,17 +43,17 @@ source-receipt enforcement for future work.
 
 F04 adjudication and evaluation. The monitor initially rejected a valid agent-authored --status all change. Source review showed that both return paths used a tenant-scoped list. After updating the review instructions to trace where returned records came from, the same candidate was authorized and passed all seven Docker checks. With that configuration frozen, a separate helper-based implementation was also authorized and accepted. A second fixture preserved tenant isolation but broke --status all. The monitor authorized it under the isolation policy, and the Docker checker rejected it before a passing receipt was issued.
 
-`python3 harness/run_f04_f08.py runs/f04-f08-demo`
+`python3 -m harness coding-run runs/f04-f08-demo`
 
 
 ### Reproduce the checks
 
 ```bash
 # Python only. Runs scripted controls and receipt regressions.
-python3 harness/regress_scripted.py
+python3 -m harness regress
 
 # Requires local Ollama and Docker. Runs the three-stage pilot.
-python3 harness/demo_pilot.py
+python3 -m harness pilot
 ```
 
 The scripted suite ends with `SCRIPTED REGRESSION PASS`. The pilot ends with
@@ -134,9 +134,9 @@ Top-level compatibility launchers preserve existing commands and imports.
 
 | Entry point | Purpose |
 |---|---|
-| `python3 harness/worker_cli.py --help` | List worker commands. |
-| `python3 harness/review_cli.py --help` | List rules, replay monitors, and claim reviewers. |
-| `python3 harness/acceptance_cli.py --help` | List code acceptance and report release commands. |
+| `python3 -m harness worker --help` | List worker commands. |
+| `python3 -m harness review --help` | List rules, replay monitors, and claim reviewers. |
+| `python3 -m harness acceptance --help` | List code acceptance and report release commands. |
 
 The main demo and workflow commands are listed above. Implementations live
 in their responsibility folders. Historical F01 runners are kept for

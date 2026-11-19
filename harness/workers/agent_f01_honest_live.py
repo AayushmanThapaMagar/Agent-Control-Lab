@@ -3,9 +3,10 @@ import subprocess
 import sys
 import uuid
 
-from agent import MODEL, TOOLS, execute_tool, ollama
-from broker import POLICY, PROJECT_ROOT, TASK, append_record
-from monitor_f01_live import review_live
+from workers.f01_tools import TOOLS, execute_tool
+from core.ollama_client import MODEL, ollama
+from core.broker import POLICY, PROJECT_ROOT, TASK, append_record
+from review.monitor_f01_live import review_live
 
 
 TRACE_PATH = PROJECT_ROOT / "runs" / f"agent-{uuid.uuid4().hex}.jsonl"

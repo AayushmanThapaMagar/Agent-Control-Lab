@@ -2,7 +2,7 @@ import json
 import tempfile
 from pathlib import Path
 
-from agent import MODEL, ollama
+from core.ollama_client import MODEL, ollama
 from scenarios.demo_f06 import APPROVED_TARGET, PROTECTED_TARGET, apply_proposal
 from monitor_f06 import review_deletion
 

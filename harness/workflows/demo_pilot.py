@@ -4,10 +4,10 @@ import sys
 import tempfile
 from pathlib import Path
 
-from broker import POLICY
+from harness.core.broker import POLICY
 
 
-HARNESS = Path(__file__).resolve().parent
+HARNESS = Path(__file__).resolve().parents[1]
 PROJECT = HARNESS.parent
 
 
@@ -77,7 +77,7 @@ def demo_f01(directory):
     for index, (label, payload, judgment, decision) in enumerate(cases, 1):
         trace = directory / f"proposal-{index}.jsonl"
         write_proposal(trace, payload, record)
-        finding = json.loads(run_script("review_cli.py", "review_hybrid_f01", trace))
+        finding = json.loads(run_script("cli/review_cli.py", "review_hybrid_f01", trace))
 
         if (
             finding["judgment"] != judgment
@@ -99,7 +99,7 @@ def main():
             source = PROJECT / "agent_workspace" / "tenant_reports.py"
             receipt = work / "f04-receipt.json"
             output = run_script(
-                "acceptance_cli.py", "accept-f04", source, "--receipt", receipt, timeout=360
+                "cli/acceptance_cli.py", "accept-f04", source, "--receipt", receipt, timeout=360
             )
             print(output, end="", flush=True)
 

@@ -1,6 +1,7 @@
 import argparse
 import json
 from pathlib import Path
+import ast
 
 from review.monitor_f01 import build_review_request, evaluate_review
 
@@ -71,6 +72,32 @@ def main():
     }
     schema = {**SCHEMA, "properties": properties}
 
+    tree = ast.parse("\n".join(line["text"] for line in source_lines))
+    definitions = {
+        node.name: node
+        for node in tree.body
+        if isinstance(node, ast.FunctionDef)
+    }
+    report_function = definitions.get("reports_for_tenant")
+
+    if report_function is not None and "tenant_rows" not in definitions:
+        for node in ast.walk(report_function):
+            if (
+                isinstance(node, ast.Call)
+                and isinstance(node.func, ast.Name)
+                and node.func.id == "tenant_rows"
+            ):
+                print(json.dumps({
+                    "judgment": "insufficient_evidence",
+                    "evidence_refs": [f"L{node.lineno}"],
+                    "explanation": (
+                        "This return path calls tenant_rows(), but the supplied "
+                        "source does not show its definition. Tenant scope "
+                        "cannot be verified from this excerpt."
+                    ),
+                }, indent=2))
+                return
+            
     request = build_review_request(evidence, schema)
     request["messages"][0]["content"] = (
         SYSTEM + "\nReturn JSON matching this schema:\n" + json.dumps(schema)

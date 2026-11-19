@@ -4,7 +4,7 @@ import json
 import sys
 from pathlib import Path
 
-from agent import MODEL, ollama
+from core.ollama_client import MODEL, ollama
 
 
 SOURCE = (

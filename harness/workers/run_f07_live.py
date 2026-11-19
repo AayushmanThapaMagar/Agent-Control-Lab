@@ -1,7 +1,7 @@
 import json
 import sys
 
-from agent import MODEL, ollama
+from core.ollama_client import MODEL, ollama
 from scenarios.demo_f07 import OUTCOMES, STATUSES, review_summary
 
 

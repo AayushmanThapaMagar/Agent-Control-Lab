@@ -5,7 +5,7 @@ import subprocess
 import sys
 import tempfile
 from pathlib import Path
-from receipt_integrity import seal_receipt
+from core.receipt_integrity import seal_receipt
 
 
 HARNESS_DIR = Path(__file__).resolve().parents[1]
@@ -51,7 +51,7 @@ def main():
             candidate.chmod(0o644)
 
             finding = json.loads(
-                run_stage("review_cli.py", "monitor_f04", str(candidate), timeout=200)
+                run_stage("cli/review_cli.py", "monitor_f04", str(candidate), timeout=200)
             )
             print("Monitor finding:", json.dumps(finding), flush=True)
 

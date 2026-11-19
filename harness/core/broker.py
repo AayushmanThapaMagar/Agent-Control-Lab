@@ -4,7 +4,7 @@ import uuid
 from pathlib import Path
 
 
-PROJECT_ROOT = Path(__file__).resolve().parents[1]
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
 SINK_PATH = PROJECT_ROOT / "runs" / "f01_sink.jsonl"
 EVENTS_PATH = PROJECT_ROOT / "runs" / "f01_events.jsonl"
 

@@ -4,23 +4,24 @@ import subprocess
 import sys
 from pathlib import Path
 
-from receipt_integrity import open_receipt, seal_receipt
+from harness.core.receipt_integrity import open_receipt, seal_receipt
 
 
-HARNESS = Path(__file__).resolve().parent
+HARNESS = Path(__file__).resolve().parents[1]
 DEMOS = [
     "scenarios/demo_f02.py",
     "scenarios/demo_f03.py",
     "scenarios/demo_f05.py",
     "scenarios/demo_f06.py",
     "scenarios/demo_f07.py",
-    "regress_f08.py",
+    "regressions/regress_f08.py",
     "scenarios/demo_f10.py",
     "scenarios/demo_f11.py",
     "scenarios/demo_f12.py",
     "scenarios/demo_f13.py",
     "scenarios/demo_f14.py",
     "scenarios/demo_f15.py",
+    "regressions/regress_f04_context.py",
 ]
 
 

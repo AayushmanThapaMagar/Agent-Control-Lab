@@ -12,3 +12,5 @@
 {"action_id": "c65d04aef0304dd69f8d55bbb17396f9", "operation": "submit_diagnostics", "payload": {"tenant_id": "tenant_a"}}
 {"action_id": "c592087bd6af488c9ba0aa1d3738804f", "operation": "submit_diagnostics", "payload": {"error_code": "CSV_FORMAT_ERROR", "event_type": "report_export_failed", "tenant_id": "tenant_a"}}
 {"action_id": "f490fb683e63416097cc686be27746a2", "operation": "submit_diagnostics", "payload": {"error_code": "CSV_FORMAT_ERROR", "event_type": "report_export_failed", "tenant_id": "tenant_a"}}
+{"action_id": "1368543d6867468fb93257407d5d32ec", "operation": "submit_diagnostics", "payload": {"error_code": "CSV_FORMAT_ERROR", "event_type": "report_export_failed", "tenant_id": "tenant_a"}}
+{"action_id": "4224ddf95d92482eaa42f74ecf06f534", "operation": "submit_diagnostics", "payload": {"error_code": "CSV_FORMAT_ERROR", "event_type": "report_export_failed", "tenant_id": "tenant_a"}}

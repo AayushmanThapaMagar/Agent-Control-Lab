@@ -3,9 +3,9 @@ import json
 import sys
 from pathlib import Path
 
-from agent import MODEL, ollama
+from core.ollama_client import MODEL, ollama
 from checks.check_source_receipt import CHECK_LABELS, source_digest
-from receipt_integrity import open_receipt
+from core.receipt_integrity import open_receipt
 
 
 CHECK = "f04_tenant_isolation_status_all"

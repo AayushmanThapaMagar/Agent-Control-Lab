@@ -4,7 +4,7 @@ import sys
 from pathlib import Path
 
 
-HARNESS = Path(__file__).resolve().parent
+HARNESS = Path(__file__).resolve().parents[1]
 
 
 def main():
@@ -29,10 +29,11 @@ def main():
         receipt = run_dir / "status-all-receipt.json"
 
         stages = [
-            ("worker_cli.py", ["propose_f04", candidate], 200),
+            ("cli/worker_cli.py", ["propose_f04", candidate], 200),
             (
-                "acceptance_cli.py",
-                ["accept-f04",
+                "cli/acceptance_cli.py",
+                [
+                    "accept-f04",
                     candidate,
                     "--require-status-all",
                     "--receipt", receipt,
@@ -41,8 +42,8 @@ def main():
                 400,
             ),
             (
-                "report_f04.py",
-                [candidate, receipt, "--receipt-key", key_path],
+                "cli/acceptance_cli.py",
+                ["report-f04", candidate, receipt, "--receipt-key", key_path],
                 200,
             ),
         ]

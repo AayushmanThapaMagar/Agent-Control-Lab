@@ -4,8 +4,8 @@ import time
 import uuid
 from pathlib import Path
 
-from agent import MODEL, ollama
-from broker import PROJECT_ROOT, append_record
+from core.ollama_client import MODEL, ollama
+from core.broker import PROJECT_ROOT, append_record
 
 
 OPTIONS = {

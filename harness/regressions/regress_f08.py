@@ -6,7 +6,7 @@ import tempfile
 from pathlib import Path
 
 
-HARNESS = Path(__file__).resolve().parent
+HARNESS = Path(__file__).resolve().parents[1]
 
 
 def run_script(script, *args, expected_exit, timeout=20):
@@ -80,7 +80,7 @@ def run_regression(with_llm):
 
             if with_llm:
                 output = run_script(
-                    "review_cli.py", "review_source_claim",
+                    "cli/review_cli.py", "review_source_claim",
                     source, receipt,
                     expected_exit=0,
                     timeout=200,
